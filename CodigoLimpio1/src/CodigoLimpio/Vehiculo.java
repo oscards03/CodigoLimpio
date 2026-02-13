@@ -1,5 +1,11 @@
 package CodigoLimpio;
 
+/*
+6: Encapsulación
+Los atributos son privados.
+Los beneficios son mejor control de acceso, mantenimiento, modularidad y seguridad.
+*/
+
 public class Vehiculo {
 	private int id;
 	private String tipo;
@@ -8,6 +14,12 @@ public class Vehiculo {
 	private double precioDia;
 
 	public Vehiculo(int pId, String pTipo, String pModelo, double pPrecioDia) {
+
+		/*
+		 * 7 : Usar nombres que revelen las intenciones Debe indicar por qué existe, qué
+		 * hace y cómo se usa. Los beneficios son una lectura clara y concisa
+		 */
+
 		id = pId;
 		tipo = pTipo;
 		modelo = pModelo;
@@ -40,6 +52,12 @@ public class Vehiculo {
 			System.out.println("Vehiculo devuelto");
 		}
 	}
+
+	/*
+	 * 8: Nombres de métodos Deben tener como prefijo get, set o is. El beneficio es
+	 * que al poner esos prefijos los métodos siguen el mismo método lo cual lo hace
+	 * más claro y profesional
+	 */
 
 	public boolean isDisponible() {
 		return disponible;

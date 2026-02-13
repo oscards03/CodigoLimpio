@@ -5,11 +5,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+/*
+1: Nombres significativos
+El nombre "Principal" indica que es el punto de entrada del programa.
+Las variables como "vehiculos", "salir", "opcion" describen lo que va a hacer cada uno.
+Los beneficios son su fácil comprensión 
+*/
+
 public class Principal {
 
 	static BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
 
 	public static void main(String[] args) throws IOException {
+
+		/*
+		 * 2: Responsabilidad Única (SRP) La clase Principal solo gestiona el menú y la
+		 * interacción con el usuario. La lógica del vehículo está en la clase Vehiculo.
+		 * Los beneficios son que cada clase tiene una única responsabilidad y no se
+		 * mezclan entre ellas.
+		 */
 		ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
 
 		vehiculos.add(new Vehiculo(1, "coche", "Toyota", 40));
@@ -58,6 +72,12 @@ public class Principal {
 
 	}
 
+	/*
+	 * 3: Métodos pequeños Lo dividimos en métodos pequeños: registrarVehiculo,
+	 * mostrarDisponibles, alquilarVehiculo, devolverVehiculo. Los beneficios son
+	 * que mejora su lectura y el mantenimiento.
+	 */
+
 	private static void registrarVehiculo(ArrayList<Vehiculo> vehiculos) throws IOException {
 
 		System.out.print("Introduce ID: ");
@@ -79,6 +99,12 @@ public class Principal {
 	}
 
 	private static void mostrarDisponibles(ArrayList<Vehiculo> vehiculos) {
+
+		/*
+		 * 4: Nombres con sentido El beneficio es que no se usan códigos complejos ni
+		 * dificiles de entender innecesarios
+		 */
+
 		boolean hay = false;
 
 		for (Vehiculo v : vehiculos) {
@@ -102,6 +128,12 @@ public class Principal {
 
 		for (Vehiculo v : vehiculos) {
 
+			/*
+			 * 5: Bajo acoplamiento Principal no modifica directamente los atributos del
+			 * objeto. Los beneficios son la facilidad del mantenimiento, reutilización del
+			 * código, escalabilidad y pruebas más efectivas
+			 */
+
 			if (v.getId() == id) {
 				encontrado = true;
 
@@ -124,16 +156,16 @@ public class Principal {
 			System.out.println("Vehiculo no encontrado");
 		}
 	}
-	
-	 private static void devolverVehiculo(ArrayList<Vehiculo> vehiculos) throws IOException {
 
-	        System.out.print("Introduce ID: ");
-	        int id = Integer.parseInt(leer.readLine());
+	private static void devolverVehiculo(ArrayList<Vehiculo> vehiculos) throws IOException {
 
-	        for (Vehiculo v : vehiculos) {
-	            if (v.getId() == id) {
-	                v.devolver();
-	            }
-	        }
-	    }
+		System.out.print("Introduce ID: ");
+		int id = Integer.parseInt(leer.readLine());
+
+		for (Vehiculo v : vehiculos) {
+			if (v.getId() == id) {
+				v.devolver();
+			}
+		}
+	}
 }
