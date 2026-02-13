@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-import codigoLimpioVehiculos.Vehiculo;
-
 public class Principal {
 
 	static BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
@@ -126,4 +124,16 @@ public class Principal {
 			System.out.println("Vehiculo no encontrado");
 		}
 	}
+	
+	 private static void devolverVehiculo(ArrayList<Vehiculo> vehiculos) throws IOException {
+
+	        System.out.print("Introduce ID: ");
+	        int id = Integer.parseInt(leer.readLine());
+
+	        for (Vehiculo v : vehiculos) {
+	            if (v.getId() == id) {
+	                v.devolver();
+	            }
+	        }
+	    }
 }
