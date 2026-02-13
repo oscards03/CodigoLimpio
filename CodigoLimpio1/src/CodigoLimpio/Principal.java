@@ -27,58 +27,103 @@ public class Principal {
 			System.out.println("3. Devolver vehículo");
 			System.out.println("4. Salir");
 			System.out.print("Opción: ");
-			
+
 			int opcion = Integer.parseInt(leer.readLine());
-			
+
 			switch (opcion) {
 
-            case 1:
-                registrarVehiculo(vehiculos);
-                break;
+			case 1:
+				registrarVehiculo(vehiculos);
+				break;
 
-            case 2:
-                mostrarDisponibles(vehiculos);
-                break;
+			case 2:
+				mostrarDisponibles(vehiculos);
+				break;
 
-            case 3:
-                alquilarVehiculo(vehiculos);
-                break;
+			case 3:
+				alquilarVehiculo(vehiculos);
+				break;
 
-            case 4:
-                devolverVehiculo(vehiculos);
-                break;
+			case 4:
+				devolverVehiculo(vehiculos);
+				break;
 
-            case 5:
-                salir = true;
-                break;
+			case 5:
+				salir = true;
+				break;
 
-            default:
-                System.out.println("Opcion no valida");
-            }
-
+			default:
+				System.out.println("Opcion no valida");
+			}
 
 		} while (!salir);
 
 	}
-	
+
 	private static void registrarVehiculo(ArrayList<Vehiculo> vehiculos) throws IOException {
 
-        System.out.print("Introduce ID: ");
-        int id = Integer.parseInt(leer.readLine());
+		System.out.print("Introduce ID: ");
+		int id = Integer.parseInt(leer.readLine());
 
-        System.out.print("Introduce tipo (coche, moto, bicicleta): ");
-        String tipo = leer.readLine();
+		System.out.print("Introduce tipo (coche, moto, bicicleta): ");
+		String tipo = leer.readLine();
 
-        System.out.print("Introduce modelo: ");
-        String modelo = leer.readLine();
+		System.out.print("Introduce modelo: ");
+		String modelo = leer.readLine();
 
-        System.out.print("Introduce precio por dia: ");
-        double precio = Double.parseDouble(leer.readLine());
+		System.out.print("Introduce precio por dia: ");
+		double precio = Double.parseDouble(leer.readLine());
 
-        Vehiculo v = new Vehiculo(id, tipo, modelo, precio);
-        vehiculos.add(v);
+		Vehiculo v = new Vehiculo(id, tipo, modelo, precio);
+		vehiculos.add(v);
 
-        System.out.println("Vehiculo registrado correctamente");
-    }
+		System.out.println("Vehiculo registrado correctamente");
+	}
 
+	private static void mostrarDisponibles(ArrayList<Vehiculo> vehiculos) {
+		boolean hay = false;
+
+		for (Vehiculo v : vehiculos) {
+			if (v.isDisponible()) {
+				System.out.println(v.toString());
+				hay = true;
+			}
+		}
+
+		if (!hay) {
+			System.out.println("No hay vehiculos disponibles");
+		}
+	}
+
+	private static void alquilarVehiculo(ArrayList<Vehiculo> vehiculos) throws IOException {
+
+		System.out.print("Introduce ID del vehiculo: ");
+		int id = Integer.parseInt(leer.readLine());
+
+		boolean encontrado = false;
+
+		for (Vehiculo v : vehiculos) {
+
+			if (v.getId() == id) {
+				encontrado = true;
+
+				if (v.isDisponible()) {
+
+					System.out.print("Nombre del cliente: ");
+					String cliente = leer.readLine();
+
+					System.out.print("Dias de alquiler: ");
+					int dias = Integer.parseInt(leer.readLine());
+
+					v.alquilar(cliente, dias);
+				} else {
+					System.out.println("No disponible");
+				}
+			}
+		}
+
+		if (!encontrado) {
+			System.out.println("Vehiculo no encontrado");
+		}
+	}
 }
